@@ -1,0 +1,63 @@
+# Cabmora API — standalone development stack
+#
+#   docker compose up --build
+#
+#   api → http://localhost:8000   uvicorn --reload  (docs at /docs)
+#   db  → localhost:5432          cabmora / cabmora
+#
+# This repo is deployable on its own. The frontends live in the separate
+# cabmora-web repo and talk to this API over HTTP only — there is no shared
+# code between them, just the OpenAPI contract at /openapi.json.
+
+name: cabmora-api
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: cabmora
+      POSTGRES_PASSWORD: cabmora
+      POSTGRES_DB: cabmora
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cabmora -d cabmora"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cabmora/api:${IMAGE_TAG:-latest}
+    environment:
+      DATABASE_URL: postgresql+asyncpg://cabmora:cabmora@db:5432/cabmora
+      JWT_SECRET_KEY: dev-secret-not-for-production
+      ENVIRONMENT: local
+      # pydantic-settings parses list[str] as JSON — the brackets are required.
+      # Frontend dev servers run on 5173/5174, their nginx builds on 8080/8081.
+      CORS_ORIGINS: '["http://localhost:5173","http://localhost:5174","http://localhost:8080","http://localhost:8081"]'
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app/app
+      - ./tests:/app/tests
+    depends_on:
+      db:
+        condition: service_healthy
+    # Migrate before serving. `depends_on: service_healthy` guarantees Postgres
+    # is accepting connections by the time this runs.
+    command: >
+      sh -c "alembic upgrade head &&
+             uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+
+  # Publish the image the cabmora-web repo consumes:
+  #   docker compose build api
+  #   docker tag cabmora/api:latest <registry>/cabmora/api:<tag>
+  #   docker push <registry>/cabmora/api:<tag>
+
+volumes:
+  postgres_data:

@@ -1,0 +1,18 @@
+CABMORA FLOW
+
+Hello {{ first_name }},
+
+Thank you for applying to Cabmora Flow with {{ studio_name }}. On this
+occasion we're not able to offer you a place on the platform.
+
+That isn't a judgement on your work. We take on a limited number of studios
+at a time and weigh fit alongside craft, so a no today needn't be a no
+permanently - you're welcome to apply again.
+
+If it would help to know more, reply to this email and we'll tell you what we
+can.
+
+--
+Cabmora Media
+Bartle House, Oxford Court, Manchester, M2 3WQ
+{{ support_email }} | +44 77 8010 5876

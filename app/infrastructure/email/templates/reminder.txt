@@ -1,0 +1,17 @@
+CABMORA MEDIA
+
+{{ first_name }}, your call is in {{ minutes_away }} minutes.
+
+With:  {{ with_name }}
+When:  {{ when }} ({{ duration_minutes }} minutes)
+{% if meeting_url %}
+Join:  {{ meeting_url }}
+{% else %}
+We'll be in touch with the joining details shortly.
+{% endif %}
+Need to move it? Reply to this email and we'll find another time.
+
+--
+Cabmora Media
+Bartle House, Oxford Court, Manchester, M2 3WQ
+{{ support_email }} | +44 77 8010 5876

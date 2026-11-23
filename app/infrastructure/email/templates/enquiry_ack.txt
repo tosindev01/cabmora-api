@@ -1,0 +1,19 @@
+CABMORA MEDIA
+
+Thank you, {{ first_name }}.
+
+Your consultation request has been received, and someone from Cabmora Media
+will be in touch within one working day to discuss your project.
+
+Usually, this starts with a short call to understand what you have in mind.
+We'll then put together a tailored quote based on your requirements.
+
+If you have anything you'd like to add in the meantime, simply reply to this
+email.
+
+Cabmora Media Ltd
+Capturing Stories. Creating Impact
+
+--
+Bartle House, Oxford Court, Manchester, M2 3WQ
+{{ support_email }} | +44 77 8010 5876

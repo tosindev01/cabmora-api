@@ -1,0 +1,18 @@
+CABMORA MEDIA — NEW ENQUIRY
+
+{{ name }}
+{{ event_type }}{% if event_date %} · {{ event_date }}{% endif %}
+
+Email:  {{ email }}
+Phone:  {% if phone %}{{ phone }}{% else %}Not given{% endif %}
+
+What they said:
+{{ message }}
+{% if admin_url %}
+Open in the console:
+{{ admin_url }}
+{% endif %}
+Replying to this email goes to Cabmora, not to {{ name }}.
+
+--
+Cabmora Media

@@ -1,0 +1,18 @@
+CABMORA MEDIA
+
+{{ first_name }}, that change is done.
+
+You asked us about {{ project_title }}:
+
+  "{{ request }}"
+
+We have made the change - take a look and let us know if it is what you had
+in mind.
+
+View your gallery:
+{{ gallery_url }}
+
+--
+Cabmora Media
+Bartle House, Oxford Court, Manchester, M2 3WQ
+{{ support_email }} | +44 77 8010 5876

@@ -1,0 +1,31 @@
+# Virtualenvs — never ship the host's venv into the image
+.venv/
+venv/
+env/
+
+# Python bytecode / caches
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Secrets — .env must come from the runtime environment, not the image
+.env
+.env.*
+!.env.example
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Docker
+Dockerfile
+.dockerignore

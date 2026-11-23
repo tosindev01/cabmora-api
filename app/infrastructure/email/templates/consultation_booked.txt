@@ -1,0 +1,22 @@
+CABMORA MEDIA
+
+{{ first_name }}, we'll speak on {{ day }}.
+
+When:      {{ when }}
+How long:  About {{ duration_minutes }} minutes
+{% if meeting_url %}
+Join:      {{ meeting_url }}
+
+Save this email - the same link works on the day. We'll send a reminder
+half an hour before.
+
+{% else %}
+We'll send the joining details before we speak, along with a reminder
+half an hour before.
+
+{% endif %}
+Doesn't suit? Reply to this email and we'll find another time.
+
+--
+Cabmora Media
+{{ support_email }} | +44 77 8010 5876

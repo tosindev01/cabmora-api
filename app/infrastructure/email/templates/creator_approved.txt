@@ -1,0 +1,16 @@
+CABMORA FLOW
+
+{{ first_name }} - {{ studio_name }} is in.
+
+Your application has been approved. Choose a password and your studio
+workspace is ready:
+
+{{ setup_url }}
+
+This link works once and expires in {{ expires_in_days }} days. If it lapses,
+reply to this email and we'll send another.
+
+--
+Cabmora Media
+Bartle House, Oxford Court, Manchester, M2 3WQ
+{{ support_email }} | +44 77 8010 5876

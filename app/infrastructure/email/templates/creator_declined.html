@@ -1,0 +1,28 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+  <p style="margin:0 0 20px 0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#c9a86a; font-weight:600;">Cabmora Flow</p>
+
+  <h1 class="h1" style="margin:0 0 22px 0; font-family:'Playfair Display',Georgia,'Times New Roman',serif; font-size:31px; line-height:1.22; color:#111111; font-weight:400;">Hello {{ first_name }}.</h1>
+
+  <p style="margin:0 0 18px 0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:15px; line-height:1.75; color:#111111;">
+    Thank you for applying to Cabmora Flow with <strong>{{ studio_name }}</strong>.
+    On this occasion we&rsquo;re not able to offer you a place on the platform.
+  </p>
+  <p style="margin:0 0 18px 0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:15px; line-height:1.75; color:#111111;">
+    That isn&rsquo;t a judgement on your work. We take on a limited number of studios
+    at a time and weigh fit alongside craft, so a no today needn&rsquo;t be a no
+    permanently &mdash; you&rsquo;re welcome to apply again.
+  </p>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr><td style="border-top:1px solid #e8e4dc; padding-top:24px;">
+      <p style="margin:0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:13px; line-height:1.7; color:#111111; opacity:0.55;">If it would help to know more, reply to this email and we&rsquo;ll tell you what we can.</p>
+    </td></tr>
+  </table>
+{% endblock %}
+
+{% block footer_note %}
+  <p style="margin:14px 0 0 0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:11px; line-height:1.7; color:#111111; opacity:0.45;">
+    You&rsquo;re receiving this because you applied to join Cabmora Flow.
+  </p>
+{% endblock %}

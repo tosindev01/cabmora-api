@@ -1,0 +1,27 @@
+CABMORA MEDIA
+
+Hello {{ first_name }},
+
+Invoice {{ number }} for {{ project_title }} is ready.
+
+  Amount due   {{ amount }}
+  Due by       {{ due_date }}
+
+View and settle it here:
+{{ invoice_url }}
+
+If anything on it looks wrong, reply to this email and we will sort it out
+before you pay.
+
+{% if bank %}HOW TO PAY
+
+Bank transfer to {{ bank.account_name }}
+{{ bank.bank_name }} | Sort code {{ bank.sort_code }} | Account {{ bank.account_number }}
+{% if bank.iban %}IBAN {{ bank.iban }}
+{% endif %}
+Please quote {{ number }} as the reference.
+
+{% endif %}--
+Cabmora Media
+Bartle House, Oxford Court, Manchester, M2 3WQ
+{{ support_email }} | +44 77 8010 5876

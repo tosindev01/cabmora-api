@@ -1,0 +1,16 @@
+CABMORA FLOW
+
+Thank you, {{ first_name }}.
+
+We've received your application for {{ studio_name }} and someone will look
+at it properly - usually within two working days.
+
+We review every studio by hand rather than letting anyone sign up, which is
+slower but means the creators on Flow are ones we'd recommend.
+
+If you'd like to add anything to your application, just reply to this email.
+
+--
+Cabmora Media
+Bartle House, Oxford Court, Manchester, M2 3WQ
+{{ support_email }} | +44 77 8010 5876

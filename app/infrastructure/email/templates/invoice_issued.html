@@ -1,0 +1,89 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+  <p style="margin:0 0 20px 0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#c9a86a; font-weight:600;">
+    Invoice {{ number }}
+  </p>
+
+  <h1 class="h1" style="margin:0 0 22px 0; font-family:'Playfair Display',Georgia,'Times New Roman',serif; font-size:31px; line-height:1.22; color:#111111; font-weight:400;">
+    Hello {{ first_name }}.
+  </h1>
+
+  <p style="margin:0 0 18px 0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:15px; line-height:1.75; color:#111111;">
+    Invoice <strong>{{ number }}</strong> for <strong>{{ project_title }}</strong> is ready.
+  </p>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 28px 0; background-color:#faf8f4;">
+    <tr>
+      <td style="padding:18px 20px; font-family:Jost,Helvetica,Arial,sans-serif; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:#111111; opacity:0.5;">Amount due</td>
+      <td align="right" style="padding:18px 20px; font-family:'Playfair Display',Georgia,serif; font-size:24px; color:#111111;">{{ amount }}</td>
+    </tr>
+    <tr>
+      <td style="padding:0 20px 18px 20px; font-family:Jost,Helvetica,Arial,sans-serif; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:#111111; opacity:0.5;">Due by</td>
+      <td align="right" style="padding:0 20px 18px 20px; font-family:Jost,Helvetica,Arial,sans-serif; font-size:15px; color:#111111;">{{ due_date }}</td>
+    </tr>
+  </table>
+  {# Bulletproof button: padded table cell for every client, VML for Outlook,
+     which ignores padding on <a> and would otherwise render bare link text. #}
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" class="btn" style="margin:0 0 30px 0;">
+    <tr><td align="center" bgcolor="#c9a86a" style="background-color:#c9a86a;">
+      <!--[if mso]>
+      <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word"
+        href="{{ invoice_url }}" style="height:50px;v-text-anchor:middle;width:266px;" arcsize="0%" stroke="f" fillcolor="#c9a86a">
+        <w:anchorlock/><center style="color:#0e0c0a;font-family:Helvetica,Arial,sans-serif;font-size:12px;letter-spacing:2px;font-weight:bold;">VIEW INVOICE</center>
+      </v:roundrect>
+      <![endif]-->
+      <!--[if !mso]><!-- -->
+      <a href="{{ invoice_url }}"
+         style="display:inline-block; padding:17px 40px; font-family:Jost,Helvetica,Arial,sans-serif; font-size:12px; letter-spacing:2px; text-transform:uppercase; font-weight:600; color:#0e0c0a; text-decoration:none;">
+        View invoice
+      </a>
+      <!--<![endif]-->
+    </td></tr>
+  </table>
+
+  <p style="margin:0 0 8px 0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:13px; line-height:1.6; color:#111111; opacity:0.55;">
+    If the button doesn&rsquo;t work, paste this into your browser:
+  </p>
+  <p style="margin:0 0 30px 0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:13px; line-height:1.6; word-break:break-all;">
+    <a href="{{ invoice_url }}" style="color:#b8965c; text-decoration:underline;">{{ invoice_url }}</a>
+  </p>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr><td style="border-top:1px solid #e8e4dc; padding-top:24px;">
+      <p style="margin:0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:13px; line-height:1.7; color:#111111; opacity:0.55;">
+        If anything on it looks wrong, reply to this email and we will sort it
+        out before you pay.
+      </p>
+    </td></tr>
+  </table>
+{% endblock %}
+
+  {# The account, in the body as well as on the attachment. Plenty of people
+     never open a PDF, and "how do I pay this" should not need a second
+     email. Absent entirely when the account is not configured — an invented
+     sort code is money sent nowhere. #}
+  {% if bank %}
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 26px 0;">
+    <tr><td style="border-top:1px solid #e8e4dc; padding-top:22px;">
+      <p style="margin:0 0 10px 0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#c9a86a; font-weight:600;">
+        How to pay
+      </p>
+      <p style="margin:0 0 6px 0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:15px; line-height:1.7; color:#111111;">
+        Bank transfer to <strong>{{ bank.account_name }}</strong>
+      </p>
+      <p style="margin:0 0 10px 0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:14px; line-height:1.7; color:#111111; opacity:0.7;">
+        {{ bank.bank_name }} &middot; Sort code {{ bank.sort_code }} &middot; Account {{ bank.account_number }}{% if bank.iban %}<br />IBAN {{ bank.iban }}{% endif %}
+      </p>
+      <p style="margin:0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:14px; line-height:1.7; color:#111111;">
+        Please quote <strong>{{ number }}</strong> as the reference.
+      </p>
+    </td></tr>
+  </table>
+  {% endif %}
+
+{% block footer_note %}
+  <p style="margin:14px 0 0 0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:11px; line-height:1.7; color:#111111; opacity:0.45;">
+    You&rsquo;re receiving this because an invoice was issued on your Cabmora project.
+  </p>
+{% endblock %}

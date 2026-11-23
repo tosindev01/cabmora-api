@@ -1,0 +1,98 @@
+{#
+  Shared chrome for every Cabmora email.
+
+  Written to 2003 HTML rules on purpose. Outlook on Windows renders with Word's
+  engine: no flexbox, no grid, no CSS variables, and `<style>` blocks are
+  stripped by Gmail's clipped view and several corporate gateways. So every
+  rule that must survive is inlined, and layout is nested tables.
+
+  Three brand concessions, all deliberate:
+  - The logo is TYPE, not the SVG. Gmail and Outlook block SVG entirely; a
+    broken image where the brand should be is worse than no image.
+  - Playfair Display and Jost are named first but will fall back to Georgia and
+    Helvetica in most clients — webfonts only load in Apple Mail and a few
+    others. The fallbacks were chosen to keep the serif/sans contrast intact.
+  - Backgrounds are the warm canvas (#faf9f6), never pure white, so clients
+    that force-invert for dark mode have something to work with.
+
+  `role="presentation"` on layout tables keeps screen readers from announcing
+  them as data tables — WCAG 2.2 AA is a stated requirement, and it applies to
+  email too.
+#}
+<!doctype html>
+<html lang="en" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="x-apple-disable-message-reformatting">
+<meta name="color-scheme" content="light">
+<meta name="supported-color-schemes" content="light">
+<title>{{ subject }}</title>
+<!--[if mso]>
+<noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript>
+<![endif]-->
+<style>
+  /* Progressive enhancement only — everything critical is inlined below. */
+  @media only screen and (max-width:620px) {
+    .px { padding-left:24px !important; padding-right:24px !important; }
+    .h1 { font-size:26px !important; line-height:1.25 !important; }
+    .btn a { display:block !important; }
+  }
+  a { color:#b8965c; }
+</style>
+</head>
+<body style="margin:0; padding:0; width:100%; background-color:#faf9f6;">
+
+  {# Preheader: the grey line clients show next to the subject. Followed by
+     zero-width spaces so the body copy is not pulled up after it. #}
+  <div style="display:none; font-size:1px; color:#faf9f6; line-height:1px; max-height:0; max-width:0; opacity:0; overflow:hidden;">
+    {{ preheader }}&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;
+  </div>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#faf9f6;">
+    <tr>
+      <td align="center" style="padding:32px 12px;">
+
+        <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:600px;">
+
+          <!-- Masthead -->
+          <tr>
+            <td align="center" bgcolor="#0e0c0a" class="px" style="background-color:#0e0c0a; padding:40px 40px 36px 40px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td align="center">
+                <div style="width:28px; height:1px; background-color:#c9a86a; font-size:0; line-height:0; margin:0 auto 18px auto;">&nbsp;</div>
+                <div style="font-family:'Playfair Display',Georgia,'Times New Roman',serif; font-size:27px; letter-spacing:7px; color:#faf9f6; text-transform:uppercase; line-height:1;">
+                  Cabmora
+                </div>
+                <div style="font-family:Jost,Helvetica,Arial,sans-serif; font-size:9px; letter-spacing:4.5px; color:#c9a86a; text-transform:uppercase; padding-top:9px;">
+                  Media
+                </div>
+              </td></tr></table>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td bgcolor="#ffffff" class="px" style="background-color:#ffffff; padding:44px 48px 40px 48px; border-left:1px solid #e8e4dc; border-right:1px solid #e8e4dc;">
+              {% block content %}{% endblock %}
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td bgcolor="#f5f3ee" class="px" style="background-color:#f5f3ee; padding:30px 48px 34px 48px; border:1px solid #e8e4dc; border-top:0;">
+              <p style="margin:0 0 12px 0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:12px; line-height:1.7; color:#111111; opacity:0.6;">
+                Cabmora Media &middot; Bartle House, Oxford Court, Manchester, M2&nbsp;3WQ
+              </p>
+              <p style="margin:0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:12px; line-height:1.7; color:#111111; opacity:0.6;">
+                {{ support_email }} &middot; +44 77 8010 5876
+              </p>
+              {% block footer_note %}{% endblock %}
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

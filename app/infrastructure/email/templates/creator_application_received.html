@@ -1,0 +1,27 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+  <p style="margin:0 0 20px 0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#c9a86a; font-weight:600;">Cabmora Flow &middot; Application received</p>
+
+  <h1 class="h1" style="margin:0 0 22px 0; font-family:'Playfair Display',Georgia,'Times New Roman',serif; font-size:31px; line-height:1.22; color:#111111; font-weight:400;">Thank you, {{ first_name }}.</h1>
+
+  <p style="margin:0 0 18px 0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:15px; line-height:1.75; color:#111111;">
+    We&rsquo;ve received your application for <strong>{{ studio_name }}</strong> and
+    someone will look at it properly &mdash; usually within two working days.
+  </p>
+  <p style="margin:0 0 18px 0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:15px; line-height:1.75; color:#111111;">
+    We review every studio by hand rather than letting anyone sign up. It is
+    slower, and it is why the creators on Flow are ones we would recommend.
+  </p>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr><td style="border-top:1px solid #e8e4dc; padding-top:24px;">
+      <p style="margin:0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:13px; line-height:1.7; color:#111111; opacity:0.55;">If you&rsquo;d like to add anything to your application, just reply to this email.</p>
+    </td></tr>
+  </table>
+{% endblock %}
+
+{% block footer_note %}
+  <p style="margin:14px 0 0 0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:11px; line-height:1.7; color:#111111; opacity:0.45;">
+    You&rsquo;re receiving this because you applied to join Cabmora Flow.
+  </p>
+{% endblock %}

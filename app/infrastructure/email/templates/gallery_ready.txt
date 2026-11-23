@@ -1,0 +1,26 @@
+CABMORA MEDIA
+
+{{ first_name }}, your photographs are ready.
+
+{{ photo_count }} {{ 'photograph' if photo_count == 1 else 'photographs' }} from
+{{ project_title }} {{ 'is' if photo_count == 1 else 'are' }} now in your private
+gallery. Have a look through, tell us what you think of any of them, and ask for
+changes to anything you would like adjusted.
+
+{% if note %}{{ note }}
+-- Cabmora Media
+
+{% endif %}View your gallery:
+{{ gallery_url }}
+
+{% if hands_over_originals %}
+These are the full-resolution files, yours to keep.
+{% else %}
+What you see carries our watermark while the work is being agreed. The
+full-resolution files follow once it is.
+{% endif %}
+
+--
+Cabmora Media
+Bartle House, Oxford Court, Manchester, M2 3WQ
+{{ support_email }} | +44 77 8010 5876

@@ -1,0 +1,19 @@
+CABMORA MEDIA
+
+Welcome, {{ first_name }}.
+
+We've set up a Cabmora account for you. Choose a password and you'll be
+able to follow your project, preview and comment on your photos and film,
+approve the final work and settle your balance - all in one place.
+
+Set your password:
+{{ invite_url }}
+
+This link works once and expires in {{ expires_in_days }} days. If it has
+already lapsed, or you weren't expecting this, reply to this email and
+we'll sort it out.
+
+--
+Cabmora Media
+Bartle House, Oxford Court, Manchester, M2 3WQ
+{{ support_email }} | +44 77 8010 5876

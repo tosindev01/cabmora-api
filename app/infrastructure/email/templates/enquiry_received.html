@@ -1,0 +1,62 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+  <p style="margin:0 0 20px 0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#c9a86a; font-weight:600;">
+    New enquiry
+  </p>
+
+  <h1 class="h1" style="margin:0 0 8px 0; font-family:'Playfair Display',Georgia,'Times New Roman',serif; font-size:31px; line-height:1.22; color:#111111; font-weight:400;">
+    {{ name }}
+  </h1>
+  <p style="margin:0 0 26px 0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:14px; color:#111111; opacity:0.55;">
+    {{ event_type }}{% if event_date %} &middot; {{ event_date }}{% endif %}
+  </p>
+
+  {# The whole enquiry, not a "you have a new lead" nudge. The recipient is
+     usually on a phone, and a notification that forces a laptop before you know
+     whether it is a wedding or a spam bot gets ignored. #}
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 26px 0;">
+    <tr><td style="background-color:#f5f3ee; border:1px solid #e8e4dc; padding:22px 24px;">
+      <p style="margin:0 0 4px 0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:#111111; opacity:0.45; font-weight:600;">Email</p>
+      <p style="margin:0 0 16px 0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:15px;">
+        <a href="mailto:{{ email }}" style="color:#b8965c; text-decoration:none;">{{ email }}</a>
+      </p>
+
+      <p style="margin:0 0 4px 0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:#111111; opacity:0.45; font-weight:600;">Phone</p>
+      <p style="margin:0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:15px; color:#111111;">
+        {% if phone %}<a href="tel:{{ phone }}" style="color:#b8965c; text-decoration:none;">{{ phone }}</a>{% else %}<span style="opacity:0.45;">Not given</span>{% endif %}
+      </p>
+    </td></tr>
+  </table>
+
+  <p style="margin:0 0 6px 0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:#111111; opacity:0.45; font-weight:600;">
+    What they said
+  </p>
+  <p style="margin:0 0 30px 0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:15px; line-height:1.75; color:#111111; white-space:pre-line;">{{ message }}</p>
+
+  {% if admin_url %}
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" class="btn" style="margin:0 0 28px 0;">
+      <tr><td align="center" bgcolor="#c9a86a" style="background-color:#c9a86a;">
+        <!--[if mso]>
+        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word"
+          href="{{ admin_url }}" style="height:50px;v-text-anchor:middle;width:230px;" arcsize="0%" stroke="f" fillcolor="#c9a86a">
+          <w:anchorlock/><center style="color:#0e0c0a;font-family:Helvetica,Arial,sans-serif;font-size:12px;letter-spacing:2px;font-weight:bold;">OPEN IN THE CONSOLE</center>
+        </v:roundrect>
+        <![endif]-->
+        <!--[if !mso]><!-- -->
+        <a href="{{ admin_url }}" style="display:inline-block; padding:17px 38px; font-family:Jost,Helvetica,Arial,sans-serif; font-size:12px; letter-spacing:2px; text-transform:uppercase; font-weight:600; color:#0e0c0a; text-decoration:none;">
+          Open in the console
+        </a>
+        <!--<![endif]-->
+      </td></tr>
+    </table>
+  {% endif %}
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr><td style="border-top:1px solid #e8e4dc; padding-top:22px;">
+      <p style="margin:0; font-family:Jost,Helvetica,Arial,sans-serif; font-size:12px; line-height:1.7; color:#111111; opacity:0.45;">
+        Replying to this email goes to Cabmora, not to {{ name }}. Use the address above.
+      </p>
+    </td></tr>
+  </table>
+{% endblock %}
