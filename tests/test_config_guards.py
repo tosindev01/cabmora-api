@@ -21,6 +21,7 @@ from app.core.config import Settings
 #: for a reason none of them is about.
 SOUND = dict(
     environment="production",
+    database_url="postgresql+asyncpg://cabmora:secret@db.internal:5432/cabmora",
     jwt_secret_key="b7f3" * 10,
     media_backend="r2",
     public_base_url="https://cabmoramedia.com",
@@ -75,6 +76,15 @@ def test_the_shipped_jwt_secret_is_refused_in_production():
 def test_serving_media_through_the_container_is_refused_in_production():
     with pytest.raises(ValueError, match="MEDIA_BACKEND"):
         Settings(**{**SOUND, "media_backend": "local"})
+
+
+@pytest.mark.parametrize(
+    "url",
+    ["", "sqlite+aiosqlite:///./cabmora.db", "sqlite:///./cabmora.db"],
+)
+def test_sqlite_database_url_is_refused_in_production(url):
+    with pytest.raises(ValueError, match="DATABASE_URL"):
+        Settings(**{**SOUND, "database_url": url})
 
 
 def test_a_live_stripe_key_on_a_laptop_is_refused():

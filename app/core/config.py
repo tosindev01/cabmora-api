@@ -252,6 +252,14 @@ class Settings(BaseSettings):
                 )
             return self
 
+        if not self.database_url or self.database_url.startswith("sqlite"):
+            raise ValueError(
+                "DATABASE_URL is unset or still points at SQLite. Refusing to "
+                "start: container filesystems are read-only or ephemeral, so "
+                "migrations either crash with 'unable to open database file' "
+                "or vanish on the next deploy. Point DATABASE_URL at Postgres "
+                "(e.g. ${{Postgres.DATABASE_URL}} on Railway)."
+            )
         if self.jwt_secret_key == DEFAULT_SECRET:
             raise ValueError(
                 "JWT_SECRET_KEY is still the shipped default — anyone with the "
